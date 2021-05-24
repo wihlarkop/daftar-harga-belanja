@@ -3,9 +3,13 @@ import typing
 from pydantic import BaseModel
 
 
-class ItemDetail(BaseModel):
+class ProductPrice(BaseModel):
+    product_price: int
+    product_discount_price: typing.Any
+
+
+class ProductDetail(BaseModel):
     product_name: str
     product_link: str
-    product_discount_price: typing.Any
-    product_price: int
+    price: ProductPrice
     product_from: str
