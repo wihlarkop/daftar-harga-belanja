@@ -106,9 +106,10 @@ def search_product(item: str):
 
             product_link = item.find('a').get('href')
             product_name = wrp_content.find('div', {'class': 'title'}).text.strip()
-            raw_product_price = wrp_content.find('span', {'class': 'strikeout disc-price'})
-            product_price = clean_price(raw_product_price.text.split('\n')[0]) if raw_product_price else ''
-            product_discount = clean_price(wrp_content.find('span', {'class': 'normal price-value'}).text.strip())
+            raw_product_discount = wrp_content.find('span', {'class': 'strikeout disc-price'})
+            product_discount = clean_price(
+                raw_product_discount.text.split('\n')[0]) if raw_product_discount else 'Tidak ada diskon'
+            product_price = clean_price(wrp_content.find('span', {'class': 'normal price-value'}).text.strip())
             product_from = wrp_content.find('span', {'class': 'sendbyProduct'}).text.strip()
             stock = wrp_content.find('div', {'class': 'wrp-btn'}).text.strip()
 
@@ -122,6 +123,3 @@ def search_product(item: str):
             products.append(product_detail)
 
     return products
-
-
-print(search_product('asdasd'))
